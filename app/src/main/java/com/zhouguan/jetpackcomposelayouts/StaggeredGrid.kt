@@ -69,13 +69,9 @@ fun StaggeredGrid(
             placeable
         }
 
-        // 计算表格的宽高
-        // 表格的宽度，应该是所有行中最宽的哪一行的宽度
-        val width = rowWidths.maxOrNull() ?: constraints.minWidth
-        // 表格的高度，应该是所有行的高度之和
-        val height = rowHeights.sumOf { it }
+        val width = rowWidths.maxOrNull() ?: constraints.maxWidth
+        val height = rowHeights.sum()
 
-        // 设置每一行的Y坐标
         val rowY = IntArray(rows) { 0 }
         for (i in 1 until rows) {
             rowY[i] = rowY[i - 1] + rowHeights[i - 1]
